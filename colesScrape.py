@@ -1,13 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-response = requests.get('https://www.coles.com.au/product/coles-no-added-hormone-beef-3-star-regular-mince-1kg-9012825')
+url = 'https://www.coles.com.au/'
 
-soup = BeautifulSoup(response.content, 'html.parser')
+page = requests.get(url)
+soup = BeautifulSoup(page.text, 'html.parser')
+print(page.status_code)
 
-print(response.status_code)
-
-print(soup.prettify())
-
-# print(response.text)
-
+print(soup.prettify)
