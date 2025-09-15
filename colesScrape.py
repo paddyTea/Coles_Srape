@@ -15,6 +15,9 @@ except Exception as e:
 soup = HTMLStorage
 # print(soup.prettify)
 
+
+
+
 # Product Name
 name = soup.find(class_='product__title').text
 print("Name: ",name)
@@ -23,6 +26,10 @@ print("Name: ",name)
 price = soup.find(class_='price').text
 print("Price: ", price)
 
+# Pricer per
+price_per = soup.find(class_='sc-79c0c972-0 jowmDW').text
+print("Price per: ", price_per)
+
 # nutrition table scrape and display
 table = soup.find_all('table', {'class': 'sc-9fe53a46-2 heRyOF coles-targeting-TableTableContainer'})[0]
 headers = []
@@ -30,6 +37,7 @@ rows = []
 for i, row in enumerate(table.find_all('tr')):
     if i == 0:
         headers.append([el.text.strip() for el in row.find_all('th')])
+        # rows.append([el.text.strip() for el in row.find_all('th')])
     else:
         label = [el.text.strip() for el in row.find_all('th')]
         values = [el.text.strip() for el in row.find_all('td')]
@@ -38,5 +46,7 @@ print("Nurtrition Information:")
 print(headers)
 for r in rows:
     print(r)
+
+print(rows[0][1])
 
 
