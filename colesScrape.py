@@ -8,13 +8,22 @@ filename = "HTML Storage"
 try:
     with open(filename, "rb") as file:
         HTMLStorage = pickle.load(file)
-        print(f"Success loading {filename}")
+        print(f"Success loading {filename}.")
 except Exception as e:
     print(f"Error loading object: {e}")
 
 soup = HTMLStorage
 # print(soup.prettify)
 
+# Product Name
+name = soup.find(class_='product__title').text
+print("Name: ",name)
+
+# Product Price
+price = soup.find(class_='price').text
+print("Price: ", price)
+
+# nutrition table scrape and display
 table = soup.find_all('table', {'class': 'sc-9fe53a46-2 heRyOF coles-targeting-TableTableContainer'})[0]
 headers = []
 rows = []
@@ -25,7 +34,9 @@ for i, row in enumerate(table.find_all('tr')):
         label = [el.text.strip() for el in row.find_all('th')]
         values = [el.text.strip() for el in row.find_all('td')]
         rows.append(label + values)
+print("Nurtrition Information:")
 print(headers)
 for r in rows:
     print(r)
+
 
