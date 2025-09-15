@@ -22,8 +22,10 @@ for i, row in enumerate(table.find_all('tr')):
     if i == 0:
         headers.append([el.text.strip() for el in row.find_all('th')])
     else:
-        rows.append([el.text.strip() for el in row.find_all('th')])
-        rows.append([el.text.strip() for el in row.find_all('td')])
+        label = [el.text.strip() for el in row.find_all('th')]
+        values = [el.text.strip() for el in row.find_all('td')]
+        rows.append(label + values)
 print(headers)
-print(rows)
+for r in rows:
+    print(r)
 
