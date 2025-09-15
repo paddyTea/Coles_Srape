@@ -1,10 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
+import pickle
 
-url = 'https://www.coles.com.au/'
+# page = requests.get(url)
+# soup = BeautifulSoup(page.text, 'html.parser')
+filename = "HTML Storage"
+try:
+    with open(filename, "rb") as file:
+        HTMLStorage = pickle.load(file)
+        print(f"Success loading {filename}")
+except Exception as e:
+    print(f"Error loading object: {e}")
 
-page = requests.get(url)
-soup = BeautifulSoup(page.text, 'html.parser')
-print(page.status_code)
-
+soup = HTMLStorage
 print(soup.prettify)
