@@ -21,24 +21,13 @@ driver.get("https://www.coles.com.au/product/coles-no-added-hormone-beef-3-star-
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 
-filename = "HTML Storage"
-try:
-    with open(filename, "wb") as file:
-        pickle.dump(soup, file)
-    print("successful Dump")
-except Exception as e:
-    print("Error during pickling object (Possibly unsupported):", {e})
+# filename = "HTML Storage"
+# try:
+#     with open(filename, "wb") as file:
+#         pickle.dump(soup, file)
+#     print("successful Dump")
+# except Exception as e:
+#     print("Error during pickling object (Possibly unsupported):", {e})
 
 
 
-table = soup.find_all('table', {'class': 'sc-9fe53a46-2 heRyOF coles-targeting-TableTableContainer'})[0]
-# headers = []
-# rows = []
-# for i, row in enumerate(table.find_all('tr')):
-#     if i == 0:
-#         headers = [el.text.strip() for el in row.find_all('th')]
-#     else:
-#         rows.append([el.text.strip() for el in row.find_all('td')])
-
-# print(headers)
-# print(rows)
