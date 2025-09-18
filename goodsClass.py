@@ -25,9 +25,7 @@ class Good:
         return str_to_float(calories)
 
     # def protein_per_dollar(self):
-    #     name = self.name
-    #     price = self.price
-    #     protein = self.nutritionInfo[[0][1]]
+        
 
 
 
