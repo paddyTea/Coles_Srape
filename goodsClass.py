@@ -26,6 +26,7 @@ class Good:
 
     # def protein_per_dollar(self):
         
+        
 
 
 

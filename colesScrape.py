@@ -3,13 +3,15 @@ from bs4 import BeautifulSoup
 import pickle
 import re
 from goodsClass import Good
+from pathlib import Path
+
 
 # page = requests.get(url)
 # soup = BeautifulSoup(page.text, 'html.parser')
 
-filename = "HTML_Storage_Apple"
+filename = "HTML_Storage_DogFood"
 try:
-    with open(filename, "rb") as file:
+    with open(Path(__file__).parent/"HTMLStorage"/filename, "rb") as file:
         HTMLStorage = pickle.load(file)
         print(f"Success loading {filename}.")
 except Exception as e:
@@ -18,9 +20,9 @@ except Exception as e:
 soup = HTMLStorage
 print(soup.prettify())
 
-# # Product Name
+# Product Name
 # name = soup.find(class_='product__title').text
-# # print("Name: ",name)
+# print("Name: ",name)
 
 # # Product Price
 # price = soup.find(class_='price').text
@@ -42,6 +44,7 @@ print(soup.prettify())
 #         label = [el.text.strip() for el in row.find_all('th')]
 #         values = [el.text.strip() for el in row.find_all('td')]
 #         rows.append(label + values)
+
 # instance = Good(name,price,price_per,rows)
         
 # print(instance.name)
@@ -49,7 +52,3 @@ print(soup.prettify())
 # print(headers)
 # for r in rows:
 #     print(r)
-
-# print("Protein :", instance.protein())
-# print("Calories: ", instance.calories())
-
