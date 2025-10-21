@@ -9,7 +9,7 @@ from pathlib import Path
 # page = requests.get(url)
 # soup = BeautifulSoup(page.text, 'html.parser')
 
-filename = "HTML_Storage_DogFood"
+filename = "HTML_Storage_Apple"
 try:
     with open(Path(__file__).parent/"HTMLStorage"/filename, "rb") as file:
         HTMLStorage = pickle.load(file)
@@ -21,12 +21,12 @@ soup = HTMLStorage
 print(soup.prettify())
 
 # Product Name
-# name = soup.find(class_='product__title').text
-# print("Name: ",name)
+name = soup.find(class_='product__title').text
+print("Name: ",name)
 
-# # Product Price
-# price = soup.find(class_='price').text
-# # print("Price: ", price)
+# Product Price
+price = soup.find(class_='price').text
+# print("Price: ", price)
 
 # # Pricer per
 # price_per = soup.find(class_='sc-79c0c972-0 jowmDW').text
