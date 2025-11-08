@@ -6,9 +6,12 @@ from selenium.webdriver.chrome.options import Options
 
 from bs4 import BeautifulSoup
 import pickle
+import time
+
+import csv
 
 options = uc.ChromeOptions()
-options.headliess = False
+options.headless = False
 
 # options.add_experimental_option("detach", True)
 # options.add_argument("--headless")
@@ -20,12 +23,19 @@ driver = uc.Chrome(options=options)
 # chrome_options.add_experimental_option(
 #     "prefs", {"profile.managed_default_content_settings.images": 2}
 # )
+
+filename = "HTML_Storage_Page_DownDown1"
+
 with driver:
-    driver.get("https://www.coles.com.au/product/coles-adult-dry-dog-food-with-beef-8kg-5075277?uztq=46abcbb7e16253b0cdc3e6c5bbe6a3f0&cid=col_cpc_Generic%7CColesSupermarkets%7CPLA%7CPet%7CAustralia%7CBroad&s_kwcid=AL!12693!3!683434678447!!!g!295782145136!&gclsrc=aw.ds&gad_source=1&gad_campaignid=20838080077&gbraid=0AAAAADzlvJeCVDGJPNajTePiumTQC8FHT")
+    driver.get("https://www.coles.com.au/browse/down-down")
+
+# try:
+
+
+
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 
-filename = "HTML_Storage_DogFood"
 try:
     with open(filename, "wb") as file:
         pickle.dump(soup, file)
@@ -33,6 +43,13 @@ try:
 except Exception as e:
     print("Error during pickling object (Possibly unsupported):", {e})
 
+file = open("MyCSVFile.csv","w")
+writer = csv.writer(file)
+writer.writerow(["test"])
+file.close()
+
+# driver.save_screenshot('downdown1.png')
+
 print(soup.prettify())
 print(filename)
-driver.close()
+# driver.close()

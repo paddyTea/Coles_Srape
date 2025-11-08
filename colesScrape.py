@@ -10,7 +10,7 @@ from pathlib import Path
 # page = requests.get(url)
 # soup = BeautifulSoup(page.text, 'html.parser')
 
-filename = "HTML_Storage_DogFood"
+filename = "HTML_Storage_Page_DownDown1"
 try:
     with open(Path(__file__).parent/"HTMLStorage"/filename, "rb") as file:
         HTMLStorage = pickle.load(file)
@@ -30,7 +30,5 @@ if "nutrition" in HTMLStorage.prettify():
     # Product Price
     price = soup.find(class_='price').text
     print("Price: ", price)
+    
 else: print("Not food / No nutrition information")
-
-# print(soup.prettify())
-
