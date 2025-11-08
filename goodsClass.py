@@ -1,4 +1,6 @@
 import re
+from bs4 import BeautifulSoup
+
 
 class Good:
     def __init__(self,name,price,price_per_100,nutritionInfo):
@@ -39,3 +41,9 @@ def str_to_float(string):
         return float(numberList[0]) + float(numberList[1])/10
     else :
         return float(numberList[0])
+    
+
+def is_food(soup):
+    if "nutrition" in soup:
+        return True
+    else: return False
