@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import pickle
 import time
-
+from selenium.webdriver.common.by import By
 import csv
 
 options = uc.ChromeOptions()
@@ -29,13 +29,14 @@ filename = "HTML_Storage_Page_DownDown1"
 with driver:
     driver.get("https://www.coles.com.au/browse/down-down")
 
-# try:
+################### This is where you are working###############
+#just reliased the pages have differnet urls, 1,2,3...ect
+# while(driver.find_element(By.CSS_SELECTOR,'a[aria-label="Go to next page"]')):
 
 
 
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
-
 try:
     with open(filename, "wb") as file:
         pickle.dump(soup, file)
