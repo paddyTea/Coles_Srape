@@ -32,3 +32,4 @@ if "nutrition" in HTMLStorage.prettify():
     print("Price: ", price)
     
 else: print("Not food / No nutrition information")
+

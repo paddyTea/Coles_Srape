@@ -13,7 +13,6 @@ except Exception as e:
     print(f"Error loading object: {e}")
 soup = HTMLStorage
 
-
 #cycles through html, collects all product hyperlinks, add all links to csv file
 file = open("urlList.csv","w")
 for a in soup.find_all('a', href=True):
@@ -22,3 +21,4 @@ for a in soup.find_all('a', href=True):
         writer.writerow(["www.coles.com.au"+a['href']])
         print("Found the URL:", a['href'])
 file.close()
+

@@ -31,7 +31,9 @@ with driver:
 
 ################### This is where you are working###############
 #just reliased the pages have differnet urls, 1,2,3...ect
-# while(driver.find_element(By.CSS_SELECTOR,'a[aria-label="Go to next page"]')):
+#find an if statement that checks to see if its the last url in the list
+
+url = "https://www.coles.com.au/browse/down-down?page=" + i
 
 
 
