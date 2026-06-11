@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import math
 import time
 
+import json
+
 import undetected_chromedriver as uc
 
 # options = uc.ChromeOptions()
@@ -20,55 +22,58 @@ headers = {
 }
 
 def get_buildID():
-    # url = "https://www.coles.com.au"
+    url = "https://www.coles.com.au"
+
     options = uc.ChromeOptions()
     options.headless = False
     driver = uc.Chrome(options=options)  
 
-    driver.get("https://www.coles.com.au")
-    time.sleep(3)
+    driver.get(url)
+    time.sleep(10)
     html = driver.page_source
-    driver.quit()
-    
-    # html = requests.get(url, headers=headers)
+    try:
+        driver.quit()
+    except:
+        pass
+
     soup = BeautifulSoup(html, 'html.parser')
     tag = soup.find("script", {"id": "__NEXT_DATA__"})
-    print(type(tag))
-    # print(tag)
-    # print(len(html.text))
-    # print(html.text[:500])
+    NEXT_DATA_dict = json.loads(tag.string)
+    buildID = NEXT_DATA_dict["buildId"]
 
-get_buildID()
+    return buildID
 
-
-
-# url = "https://www.coles.com.au/_next/data/20260604.5-a09f9d79cd805eb0b1e69384ef01727addd38664/en/browse/meat-seafood.json?slug=meat-seafood"
-
-# html = requests.get(url, headers=headers)
-
-# print(html.status_code)
-# # print(html.text)
-# data = html.json()
-
-# noOfResults = data["pageProps"]["searchResults"]["noOfResults"]
-# pageSize = data["pageProps"]["searchResults"]["pageSize"]
-# NumOfPage = math.ceil(noOfResults/pageSize)
+buildId = get_buildID()
+print(buildId)
 
 
-# for x in range(NumOfPage):
-#     print(x+1)
-#     url = f"https://www.coles.com.au/_next/data/20260604.5-a09f9d79cd805eb0b1e69384ef01727addd38664/en/browse/meat-seafood.json?page={x+1}slug=meat-seafood"
+url = f"https://www.coles.com.au/_next/data/{buildId}/en/browse/meat-seafood.json?slug=meat-seafood"
+
+html = requests.get(url, headers=headers)
+
+print(html.status_code)
+# print(html.text)
+data = html.json()
+
+noOfResults = data["pageProps"]["searchResults"]["noOfResults"]
+pageSize = data["pageProps"]["searchResults"]["pageSize"]
+NumOfPage = math.ceil(noOfResults/pageSize)
+
+
+for x in range(NumOfPage):
+    print(x+1)
+    url = f"https://www.coles.com.au/_next/data/{buildId}/en/browse/meat-seafood.json?page={x+1}slug=meat-seafood"
             
-#     html = requests.get(url, headers=headers)
-#     data = html.json()
+    html = requests.get(url, headers=headers)
+    data = html.json()
 
-#     products = data["pageProps"]["searchResults"]["results"]
-#     for product in products:
-#         if product["_type"] == "PRODUCT" and product["availability"] == True:  
-#             name = product["name"]
-#             price = product["pricing"]["now"]
-#             print(f"{name}: ${price}")
-#     print(f"page {x+1} scanned")
+    products = data["pageProps"]["searchResults"]["results"]
+    for product in products:
+        if product["_type"] == "PRODUCT" and product["availability"] == True:  
+            name = product["name"]
+            price = product["pricing"]["now"]
+            print(f"{name}: ${price}")
+    print(f"page {x+1} scanned")
 
 
 
